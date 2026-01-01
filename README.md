@@ -5,6 +5,7 @@
 A lightweight, singleton-based CLI multi-spinner library for Node.js. Run multiple spinners simultaneously without visual corruption, with automatic console interception.
 
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Downloads](https://img.shields.io/npm/d18m/@shoru/spindle.svg?style=for-the-badge)](https://www.npmjs.com/package/@shoru/spindle)
 [![npm](https://img.shields.io/npm/v/@shoru/spindle.svg?style=for-the-badge)](https://www.npmjs.com/package/@shoru/spindle)
 [![Types](https://img.shields.io/badge/types-included-blue?style=for-the-badge&logo=typescript)](https://github.com/Mangaka-bot/spindle/tree/main/src)
 
