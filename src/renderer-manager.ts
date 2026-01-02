@@ -11,7 +11,6 @@ const CONSOLE_METHODS: Readonly<Record<ConsoleMethod, StreamType>> = {
 
 const CONSOLE_METHOD_KEYS = Object.keys(CONSOLE_METHODS) as readonly ConsoleMethod[];
 
-// Default frame as fallback (satisfies noUncheckedIndexedAccess)
 const DEFAULT_FRAME = '⠋';
 
 export class RendererManager {
@@ -70,7 +69,6 @@ export class RendererManager {
   }
 
   getSpinnerFrame(): string {
-    // FIX 1: Provide fallback for noUncheckedIndexedAccess
     return SPINNER_FRAMES[this.#spinnerIndex] ?? DEFAULT_FRAME;
   }
 
@@ -144,7 +142,10 @@ export class RendererManager {
       this.#restoreConsole();
       this.#restoreStreams();
       this.#intercepted = false;
-      try { logUpdate.done(); } catch { /* noop */ }
+      try {
+        logUpdate.clear();
+        logUpdate.done();
+      } catch { /* noop */ }
     }
 
     this.#spinnerIndex = 0;
@@ -204,13 +205,10 @@ export class RendererManager {
         const encoding = typeof encodingOrCb === 'string' ? encodingOrCb : 'utf8';
         const cb = typeof encodingOrCb === 'function' ? encodingOrCb : callback;
         
-        // FIX 2: Uint8Array.toString() takes no arguments
-        // Use Buffer.from() or TextDecoder for proper encoding support
         let str: string;
         if (typeof chunk === 'string') {
           str = chunk;
         } else {
-          // Convert Uint8Array to string with proper encoding
           str = Buffer.from(chunk).toString(encoding);
         }
 
@@ -257,7 +255,6 @@ export class RendererManager {
               ? this.#originalStderrWrite 
               : this.#originalStdoutWrite;
             
-            // Safe access with type guard
             const text = args[0];
             if (writer && typeof text === 'string') {
               const output = text.endsWith('\n') ? text : `${text}\n`;
