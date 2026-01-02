@@ -1,6 +1,6 @@
 {
   "name": "@shoru/spindle",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "A lightweight, singleton-based CLI multi-spinner library for Node.js",
   "type": "module",
   "main": "./dist/index.js",

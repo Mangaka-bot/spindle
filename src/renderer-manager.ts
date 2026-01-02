@@ -142,10 +142,7 @@ export class RendererManager {
       this.#restoreConsole();
       this.#restoreStreams();
       this.#intercepted = false;
-      try {
-        logUpdate.clear();
-        logUpdate.done();
-      } catch { /* noop */ }
+      try { logUpdate.done(); } catch { /* noop */ }
     }
 
     this.#spinnerIndex = 0;
